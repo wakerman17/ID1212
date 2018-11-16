@@ -1,0 +1,12 @@
+Exception was thrown: Connection reset2018/11/16 23:27:19
+java.net.SocketException: Connection reset
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:186)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:200)
+	at java.base/java.io.ObjectInputStream$PeekInputStream.peek(ObjectInputStream.java:2723)
+	at java.base/java.io.ObjectInputStream$BlockDataInputStream.peek(ObjectInputStream.java:3050)
+	at java.base/java.io.ObjectInputStream$BlockDataInputStream.peekByte(ObjectInputStream.java:3060)
+	at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1561)
+	at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:430)
+	at server.net.ClientHandler.run(ClientHandler.java:80)
+	at java.base/java.lang.Thread.run(Thread.java:834)
