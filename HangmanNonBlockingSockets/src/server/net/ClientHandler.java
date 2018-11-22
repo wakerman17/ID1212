@@ -66,13 +66,12 @@ class ClientHandler implements Runnable {
 		return currentWordState;
 	}
 
-	int disconnectClient() {
+	void disconnectClient() {
 		try {
 			clientSocketChannel.close();
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
-		return ID;
 	}
 
 	/**
