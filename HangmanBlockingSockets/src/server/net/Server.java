@@ -7,8 +7,7 @@ import java.net.Socket;
 import server.view.View.ErrorHandler;
 
 /**
- * Receives chat messages and broadcasts them to all chat clients. All communication to/from any
- * chat node pass this server.
+ * Accept the connection to the server and let the ClientHandler handle the client
  */
 public class Server {
     private static final int LINGER_TIME = 5000;
