@@ -33,7 +33,11 @@ public class Game {
 		gameState.newQuestion(questionAndAnswer);
 		return gameState;
 	}
-
+	
+	/**
+	 * 
+	 * @return The current GameState
+	 */
 	public GameState getGameState() {
 		return gameState;
 	}
