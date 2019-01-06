@@ -1,0 +1,8 @@
+Q: What is the capital of Sweden
+A: Stockholm
+Q: At which date is Christmas?
+A: 24th December
+Q: What do you get if you guess right on this question
+A: A point
+Q: When are the exam for the course ID1212?
+A: 7th January
