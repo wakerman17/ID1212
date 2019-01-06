@@ -15,7 +15,7 @@ import server.view.View.ErrorHandler;
 
 
 /**
- * Handles all communication with one particular chat client.
+ * Handles all communication with one particular client.
  */
 class ClientHandler implements Runnable {
     private final Socket clientSocket;
