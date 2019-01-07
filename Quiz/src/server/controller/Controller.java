@@ -69,10 +69,7 @@ public class Controller {
 	 * @return true if the client won, otherwise false
 	 */
 	public boolean clientWin() {
-		if (game.getGameState().needToChangeQuestion()) {
-			return true;
-		}
-		return false;
+		return game.getGameState().needToChangeQuestion();
 	}
 
 	/**
