@@ -81,6 +81,7 @@ class ClientHandler implements Runnable {
 					gameState = serverController.startGame();
 					if (gameState != null) {
 						allClientHandlers.broadcast(gameState);
+						
 					}
 					break;
 				case GUESS:
