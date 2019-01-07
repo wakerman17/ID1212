@@ -59,8 +59,6 @@ public class GameState {
 		currentWinner = id;
 		changeQuestion = true;
 		gameStateDTO.setupRightGuess(id, changeQuestion);
-		//gameStateDTO.setCurrentWinner(id);
-		//gameStateDTO.setNeedToChangeQuestion(changeQuestion);
 	}
 	
 	
@@ -88,9 +86,7 @@ public class GameState {
 	 */
 	synchronized public void addClient(String username, int id) {
 		listOfClients.add(new ClientDTO(username, id));
-		//gameStateDTO.setListOfPlayers(listOfClients);
 		amountOfClients++;
-		//gameStateDTO.setAmountOfClients(amountOfClients);
 		gameStateDTO.setupAddClient(listOfClients, amountOfClients);
 	}
 	
