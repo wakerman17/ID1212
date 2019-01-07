@@ -1,7 +1,6 @@
 package client.view;
 
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.util.Scanner;
 
 import client.controller.Controller;
