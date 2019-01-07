@@ -56,7 +56,6 @@ public class LineWriter implements Runnable {
 		System.out.println(
 				"Hi, welcome to a quiz game. First you need to conect to the server. You need to copy the information from the server. Same prompt again means "
 				+ "unsuccessful to connect.");
-		//boolean connected = false;
 		boolean usernameSet = false;
 		
 		inGame = false;
