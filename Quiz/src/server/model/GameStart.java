@@ -34,6 +34,7 @@ public class GameStart {
 	 */
 	public boolean lastPlayer() {
 		if (clientsReady == Constants.AMOUNT_OF_PLAYERS) {
+			clientsReady = 0;
 			return true;
 		}
 		return false;
