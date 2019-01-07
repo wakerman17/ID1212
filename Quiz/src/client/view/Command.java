@@ -17,7 +17,9 @@ public enum Command {
      * Guess an answer.
      */
     GUESS,
-    
+    /**
+     * Set the username
+     */
     USERNAME,
     /**
      * Called when a new question should be guessed.
