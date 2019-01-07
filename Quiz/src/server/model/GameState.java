@@ -9,15 +9,19 @@ import common.GameStateDTO;
  * The Game's state for this client's game, has information about the current guess game and the whole session.    
  * 
  */
-public class GameState implements GameStateDTO {
-	private static final long serialVersionUID = 6728193616943214673L;
+public class GameState {
 	String question;
 	String answer;
-	ArrayList<ClientDTO> listOfPlayers = new ArrayList<ClientDTO>();
-	int amountOfPlayers;
+	ArrayList<ClientDTO> listOfClients = new ArrayList<ClientDTO>();
+	int amountOfClients;
 	boolean changeQuestion = false;
 	boolean firstTimeShowQuestion = false;
 	int currentWinner = -1;
+	GameStateDTO gameStateDTO;
+	
+	public void addDTO(GameStateDTO gameStateDTO) {
+		this.gameStateDTO = gameStateDTO;
+	}
 	
 	/**
 	 * Change the old and solved word (by losing or winning) by a new one.
@@ -27,24 +31,19 @@ public class GameState implements GameStateDTO {
 	public void newQuestion(QuestionAnswerDTO questionAndAnswer) {
 		this.question = questionAndAnswer.getQuestion();
 		this.answer = questionAndAnswer.getAnswer();
+		gameStateDTO.setQuestion(question);
+		gameStateDTO.setAnswer(answer);
 		firstTimeShowQuestion = true;
+		gameStateDTO.setFirstTimeShowQuestion(firstTimeShowQuestion);
 	}
 	
 	/**
-	 * Called when the client hav guessed. 
+	 * Called when the client have guessed. 
 	 * 
 	 */
 	public void firstGuess() {
 		firstTimeShowQuestion = false;
-	}
-	
-	/**
-	 * 
-	 * @return true if the client should show question, else false
-	 */
-	@Override
-	public boolean getFirstTimeShowQuestion() {
-		 return firstTimeShowQuestion;
+		gameStateDTO.setFirstTimeShowQuestion(firstTimeShowQuestion);
 	}
 	
 	/**
@@ -58,27 +57,16 @@ public class GameState implements GameStateDTO {
 			client.addScore();
 		}
 		currentWinner = id;
+		gameStateDTO.setCurrentWinner(id);
 		changeQuestion = true;
+		gameStateDTO.setNeedToChangeQuestion(changeQuestion);
 	}
 	
-	/**
-	 * Get the current winner 
-	 * 
-	 * @return the ID from the ClientDTO current winner 
-	 */
-	@Override
-	public int getCurrentWinner() {
-		int currentWinnerReturning = currentWinner;
-		currentWinner = -1;
-		changeQuestion = false;
-		return currentWinnerReturning;
-	}
 	
 	/**
 	 * 
 	 * @return The current question.
 	 */
-	@Override
 	public String getQuestion() {
 		return question;
 	}
@@ -87,7 +75,6 @@ public class GameState implements GameStateDTO {
 	 * 
 	 * @return The current answer
 	 */
-	@Override
 	public String getAnswer() {
 		return answer;
 	}
@@ -99,51 +86,15 @@ public class GameState implements GameStateDTO {
 	 * @param id The ID of the Client
 	 */
 	synchronized public void addClient(String username, int id) {
-		listOfPlayers.add(new ClientDTO(username, id));
-		amountOfPlayers++;
-	}
-	
-	/**
-	 * 
-	 * @return The amount of clients currently
-	 */
-	@Override
-	public int getAmountOfClients() {
-		return amountOfPlayers;
-	}
-	
-	/**
-	 * 
-	 * @param id
-	 * @return The username of the client with the ID in the argument.
-	 */
-	@Override
-	public String usernameOfClient(int id) {
-		ClientDTO client = iteratePlayers(id);
-		if (client != null) {
-			return client.getUsername();
-		}
-		return null;
-	}
-	
-	/**
-	 * 
-	 * @param id
-	 * @return The score of the client with the ID in the argument.
-	 */
-	@Override
-	public int scoreOfClient(int id) {
-		ClientDTO client = iteratePlayers(id);
-		if (client != null) {
-			return client.getScore();
-		}
-		return -1;
+		listOfClients.add(new ClientDTO(username, id));
+		gameStateDTO.setListOfPlayers(listOfClients);
+		amountOfClients++;
+		gameStateDTO.setAmountOfClients(amountOfClients);
 	}
 	
 	/**
 	 * @return true if the user should change question, else false.
 	 */
-	@Override
 	public boolean needToChangeQuestion() {
 		return changeQuestion;
 	}
@@ -154,7 +105,7 @@ public class GameState implements GameStateDTO {
 	 * @param id The id of the client to remove.
 	 */
 	public void removeClient(int id) {
-		Iterator<ClientDTO> iterator = listOfPlayers.iterator();
+		Iterator<ClientDTO> iterator = listOfClients.iterator();
 		while (iterator.hasNext()) {
 			if(iterator.next().getID() == id) {
 				iterator.remove();
@@ -164,7 +115,7 @@ public class GameState implements GameStateDTO {
 	}
 	
 	private ClientDTO iteratePlayers(int id) {
-		Iterator<ClientDTO> iterator = listOfPlayers.iterator();
+		Iterator<ClientDTO> iterator = listOfClients.iterator();
 		ClientDTO client;
 		while (iterator.hasNext()) {
 			client = iterator.next();
