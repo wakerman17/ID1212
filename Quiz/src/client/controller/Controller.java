@@ -37,7 +37,7 @@ public class Controller {
             } catch (IOException e) {
             	throw new UncheckedIOException(e);
             }
-        });
+        }).thenRun(() -> consoleOutput.connectedToServer());
 		
 	}
 	
