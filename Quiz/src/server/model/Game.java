@@ -2,14 +2,17 @@ package server.model;
 
 import java.io.IOException;
 
+import common.GameStateDTO;
+
 /**
- * Stores the game logic for the Hangman game.
+ * Stores the game logic for the Quiz game.
  *
  */
 public class Game {
 	QuestionAnswerDTO questionAndAnswer;
 	GameState gameState;
 	RandomQuestionHandler randomQuestionHandler;
+	GameStateDTO gameStateDTO;
 
 	/**
 	 * Creates a new instance of game
@@ -20,7 +23,8 @@ public class Game {
 	public Game() throws IOException {
 		randomQuestionHandler = new RandomQuestionHandler();
 		gameState = new GameState();
-
+		gameStateDTO = new GameStateDTO();
+		gameState.addDTO(gameStateDTO);
 	}
 
 	/**
@@ -28,10 +32,10 @@ public class Game {
 	 * 
 	 * @return The game's state when a new word is chosen.
 	 */
-	public GameState newQuestion() {
+	public GameStateDTO newQuestion() {
 		questionAndAnswer = randomQuestionHandler.getQuestionAndAnswer();
 		gameState.newQuestion(questionAndAnswer);
-		return gameState;
+		return gameStateDTO;
 	}
 	
 	/**
@@ -49,11 +53,11 @@ public class Game {
 	 * @param id    The ID of the ClientHandler sending the guess
 	 * @return The game's state after the result of the guess
 	 */
-	synchronized public GameState guess(String guess, int id) {
+	synchronized public GameStateDTO guess(String guess, int id) {
 		gameState.firstGuess();
 		if (guess.equals(gameState.getAnswer())) {
 			gameState.answerRight(id);
 		}
-		return gameState;
+		return gameStateDTO;
 	}
 }
