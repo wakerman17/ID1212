@@ -31,10 +31,10 @@ public class GameState {
 	public void newQuestion(QuestionAnswerDTO questionAndAnswer) {
 		this.question = questionAndAnswer.getQuestion();
 		this.answer = questionAndAnswer.getAnswer();
-		gameStateDTO.setQuestion(question);
-		gameStateDTO.setAnswer(answer);
 		firstTimeShowQuestion = true;
-		gameStateDTO.setFirstTimeShowQuestion(firstTimeShowQuestion);
+		int currentWinner = -1;
+		boolean changeQuestion = false;
+		gameStateDTO.setupNewQuestion(question, answer, firstTimeShowQuestion, currentWinner, changeQuestion);
 	}
 	
 	/**
@@ -57,9 +57,10 @@ public class GameState {
 			client.addScore();
 		}
 		currentWinner = id;
-		gameStateDTO.setCurrentWinner(id);
 		changeQuestion = true;
-		gameStateDTO.setNeedToChangeQuestion(changeQuestion);
+		gameStateDTO.setupRightGuess(id, changeQuestion);
+		//gameStateDTO.setCurrentWinner(id);
+		//gameStateDTO.setNeedToChangeQuestion(changeQuestion);
 	}
 	
 	
@@ -87,9 +88,10 @@ public class GameState {
 	 */
 	synchronized public void addClient(String username, int id) {
 		listOfClients.add(new ClientDTO(username, id));
-		gameStateDTO.setListOfPlayers(listOfClients);
+		//gameStateDTO.setListOfPlayers(listOfClients);
 		amountOfClients++;
-		gameStateDTO.setAmountOfClients(amountOfClients);
+		//gameStateDTO.setAmountOfClients(amountOfClients);
+		gameStateDTO.setupAddClient(listOfClients, amountOfClients);
 	}
 	
 	/**
