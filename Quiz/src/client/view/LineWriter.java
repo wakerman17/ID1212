@@ -28,6 +28,7 @@ public class LineWriter implements Runnable {
 	private volatile boolean okToWrite = false;
 	private volatile boolean gonnaStart = false;
 	private boolean inGame = false;
+	private volatile boolean connected = false;
 	private ErrorMessageHandler errorMessageHandler;
 
 	/**
@@ -53,8 +54,9 @@ public class LineWriter implements Runnable {
 	public void run() {
 		Scanner lineReader = new Scanner(System.in);
 		System.out.println(
-				"Hi, welcome to a quiz game. First you need to conect to the server. You need to copy the information from the server.");
-		boolean connected = false;
+				"Hi, welcome to a quiz game. First you need to conect to the server. You need to copy the information from the server. Same prompt again means "
+				+ "unsuccessful to connect.");
+		//boolean connected = false;
 		boolean usernameSet = false;
 		
 		inGame = false;
@@ -71,11 +73,6 @@ public class LineWriter implements Runnable {
 						if (serverAddress != null) {
 							String[] serverAddressArray = serverAddress.split(" ");
 							controller.addClient(serverAddressArray[0], serverAddressArray[1], new ConsoleOutput());
-							prompt = USERNAME_PROMPT;
-							System.out.println(
-									"In the game you and an opponent will get a question, the one to first answer right gets a point");
-							System.out.println("Commands: To quit print: \"quit\".");
-							connected = true;
 						} else {
 							System.out.println("Copy the information from the server.");
 						}
@@ -165,7 +162,7 @@ public class LineWriter implements Runnable {
 					}
 					break;
 				}
-			} catch (UncheckedIOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 				errorExecution("A problem happend. Press enter to confirm.", e);
 				okToWrite = false;
@@ -224,6 +221,16 @@ public class LineWriter implements Runnable {
 		public void handleDisconnect() {
 			System.out.println("Some other player quited. The game has therefore ended. Press enter to confirm.");
 			okToWrite = false;
+		}
+
+		@Override
+		public void connectedToServer() {
+			prompt = USERNAME_PROMPT;
+			System.out.println(
+					"In the game you and opponents will get a question, the one to first answer right gets a point");
+			System.out.println("Commands: To quit print: \"quit\".");
+			connected = true;
+			System.out.print(prompt);
 		}
 	}
 }
