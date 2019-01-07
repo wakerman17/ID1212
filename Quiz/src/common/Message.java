@@ -57,7 +57,7 @@ public class Message implements Serializable {
      * @return The message's {@code GameState} body
      */
     public GameStateDTO getGameStateDTO() {
-        return (GameStateDTO) gameStateDTO;
+        return gameStateDTO;
     }
 
     /**
