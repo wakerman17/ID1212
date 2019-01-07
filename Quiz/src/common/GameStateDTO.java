@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 import server.model.ClientDTO;
 
-public class GameStateDTO implements Serializable{
+public class GameStateDTO implements Serializable {
 	private static final long serialVersionUID = 8697322934853739527L;
 	private String question = null;
 	private String answer = null;
@@ -14,20 +14,54 @@ public class GameStateDTO implements Serializable{
 	private boolean changeQuestion = false;
 	private int amountOfClients = 0;
 	private int currentWinner = -1;
-	private ArrayList<ClientDTO> listOfPlayers;
-	
-	public void setNeedToChangeQuestion(boolean changeQuestion) {
-		this.changeQuestion = changeQuestion;
-	}
-	
+	private ArrayList<ClientDTO> listOfClients;
+
 	/**
 	 * 
-	 * @return {@code true} if the client need to change the current question otherwise {@code false}. 
+	 * @param question              The new value of question.
+	 * @param answer                The new value of answer.
+	 * @param firstTimeShowQuestion The new value of firstTimeShowQuestion.
+	 * @param currentWinner         The new value of currentWinner.
+	 * @param changeQuestion        The new value of changeQuestion.
+	 */
+	public void setupNewQuestion(String question, String answer, boolean firstTimeShowQuestion, int currentWinner,
+			boolean changeQuestion) {
+		this.question = question;
+		this.answer = answer;
+		this.firstTimeShowQuestion = firstTimeShowQuestion;
+		this.currentWinner = currentWinner;
+		this.changeQuestion = changeQuestion;
+	}
+
+	/**
+	 * 
+	 * @param currentWinner  The new value of currentWinner.
+	 * @param changeQuestion The new value of changeQuestion.
+	 */
+	public void setupRightGuess(int currentWinner, boolean changeQuestion) {
+		this.currentWinner = currentWinner;
+		this.changeQuestion = changeQuestion;
+	}
+
+	/**
+	 * 
+	 * @param listOfClients   The new value of listOfClients.
+	 * @param amountOfClients The new value of amountOfClients.
+	 */
+	public void setupAddClient(ArrayList<ClientDTO> listOfClients, int amountOfClients) {
+		this.listOfClients = listOfClients;
+		this.amountOfClients = amountOfClients;
+	}
+
+	/**
+	 * 
+	 * @return {@code true} if the client need to change the current question
+	 *         otherwise {@code false}.
 	 */
 	public boolean getNeedToChangeQuestion() {
 		return changeQuestion;
 	}
-	
+
 	/**
 	 * 
 	 * @param firstTimeShowQuestion The new value of firstTimeShowQuestion.
@@ -35,7 +69,7 @@ public class GameStateDTO implements Serializable{
 	public void setFirstTimeShowQuestion(boolean firstTimeShowQuestion) {
 		this.firstTimeShowQuestion = firstTimeShowQuestion;
 	}
-	
+
 	/**
 	 * 
 	 * @return true if the question should be shown else false.
@@ -43,15 +77,7 @@ public class GameStateDTO implements Serializable{
 	public boolean getFirstTimeShowQuestion() {
 		return firstTimeShowQuestion;
 	}
-	
-	/**
-	 * 
-	 * @param question The new value of question
-	 */
-	public void setQuestion(String question) {
-		this.question = question;
-	}
-	
+
 	/**
 	 * 
 	 * @return The question
@@ -59,15 +85,7 @@ public class GameStateDTO implements Serializable{
 	public String getQuestion() {
 		return question;
 	}
-	
-	/**
-	 * 
-	 * @param answer The new value of answer
-	 */
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
-	
+
 	/**
 	 * 
 	 * @return Get the answer of the question
@@ -75,34 +93,15 @@ public class GameStateDTO implements Serializable{
 	public String getAnswer() {
 		return answer;
 	}
-	
-	/**
-	 * 
-	 * @param currentWinner The new value of currentWinner
-	 */
-	public void setCurrentWinner(int currentWinner) {
-		this.currentWinner = currentWinner;
-	}
-	
+
 	/**
 	 * 
 	 * @return The winner's ID of the current game, or -1 if no winner
 	 */
 	public int getCurrentWinner() {
-		int currentWinnerReturning = currentWinner;
-		currentWinner = -1;
-		changeQuestion = false;
-		return currentWinnerReturning;
+		return currentWinner;
 	}
-	
-	/**
-	 * 
-	 * @param amountOfClients The new value of amountOfClients
-	 */
-	public void setAmountOfClients(int amountOfClients) {
-		this.amountOfClients = amountOfClients;
-	}
-	
+
 	/**
 	 * 
 	 * @return How many clients that is playing the game
@@ -110,15 +109,7 @@ public class GameStateDTO implements Serializable{
 	public int getAmountOfClients() {
 		return amountOfClients;
 	}
-	
-	/**
-	 * 
-	 * @param listOfPlayers The new value of listOfPlayers
-	 */
-	public void setListOfPlayers (ArrayList<ClientDTO> listOfPlayers) {
-		this.listOfPlayers = listOfPlayers;
-	}
-	
+
 	/**
 	 * 
 	 * @param id
@@ -131,7 +122,7 @@ public class GameStateDTO implements Serializable{
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 
 	 * @param id
@@ -144,13 +135,13 @@ public class GameStateDTO implements Serializable{
 		}
 		return -1;
 	}
-	
+
 	private ClientDTO iteratePlayers(int id) {
-		Iterator<ClientDTO> iterator = listOfPlayers.iterator();
+		Iterator<ClientDTO> iterator = listOfClients.iterator();
 		ClientDTO client;
 		while (iterator.hasNext()) {
 			client = iterator.next();
-			if(client.getID() == id) {
+			if (client.getID() == id) {
 				return client;
 			}
 		}
