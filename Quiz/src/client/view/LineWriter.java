@@ -188,7 +188,7 @@ public class LineWriter implements Runnable {
 
 		@Override
 		public void handleGameState(GameStateDTO gameState) {
-			if (!gameState.needToChangeQuestion()) {
+			if (!gameState.getNeedToChangeQuestion()) {
 				if (gameState.getFirstTimeShowQuestion()) {
 					inGame = true;
 					waitForOtherPlayer = false;
@@ -200,11 +200,11 @@ public class LineWriter implements Runnable {
 					System.out.print(prompt);
 				}
 			} else {
-				System.out.println("Player " + gameState.usernameOfClient(gameState.getCurrentWinner())
+				System.out.println("Player " + gameState.getUsernameOfClient(gameState.getCurrentWinner())
 						+ " won, the answer was " + gameState.getAnswer() + ".");
 				System.out.println("This is the current score:");
 				for (int i = 0; i < gameState.getAmountOfClients(); i++) {
-					System.out.println("Player " + gameState.usernameOfClient(i) + " has " + gameState.scoreOfClient(i));
+					System.out.println("Player " + gameState.getUsernameOfClient(i) + " has " + gameState.getScoreOfClient(i));
 				}
 				gonnaStart = false;
 				prompt = START_PROMPT;
