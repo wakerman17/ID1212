@@ -20,10 +20,15 @@ public interface OutputHandler {
 	 * @param connectionFailure 
 	 * 
 	 */
-	void handleErrorMessage(Exception connectionFailure);
+	public void handleErrorMessage(Exception connectionFailure);
 	
 	/**
 	 * Print a disconnect message.
 	 */
 	public void handleDisconnect ();
+	
+	/**
+	 * Called when the connection to the server was successful.
+	 */
+	public void connectedToServer();
 }
