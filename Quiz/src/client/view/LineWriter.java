@@ -17,7 +17,7 @@ public class LineWriter implements Runnable {
 	private final String CONNECT_PROMPT = "write connection> ";
 	private final String USERNAME_PROMPT = "print 'USERNAME [username]' to choose username> ";
 	private final String START_PROMPT = "print 'START' to play> ";
-	private final String GUESS_PROMPT = "print your guess> ";
+	private final String GUESS_PROMPT = "print 'guess [your guess]' to guess> ";
 	
 	private final String WAITING_OPPONENT_MESSAGE = "You are waiting for an opponent.";
 	private final String CONNECTING_MESSAGE = "You must connect first.";
@@ -141,11 +141,9 @@ public class LineWriter implements Runnable {
 					break;
 
 				case GUESS:
-
-				default:
 					if (!waitForOtherPlayer) {
 						if (connected && gonnaStart) {
-							String guess = enteredLine.getWordsAfter(0);
+							String guess = enteredLine.getWordsAfter(1);
 							if (guess != null) {
 								controller.guess(guess);
 								prompt = GUESS_PROMPT;
@@ -160,6 +158,7 @@ public class LineWriter implements Runnable {
 						System.out.println(WAITING_OPPONENT_MESSAGE);
 					}
 					break;
+				default:
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
