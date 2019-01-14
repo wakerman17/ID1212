@@ -1,0 +1,20 @@
+Exception was thrown: src\resources\words.txt (Det går inte att hitta sökvägen)2019/01/10 18:03:47
+java.io.FileNotFoundException: src\resources\words.txt (Det går inte att hitta sökvägen)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:219)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:157)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:112)
+	at java.base/java.io.FileReader.<init>(FileReader.java:60)
+	at android.william.hangman.model.RandomWordsHandler.<init>(RandomWordsHandler.java:23)
+	at android.william.hangman.model.Game.<init>(Game.java:26)
+	at android.william.hangman.controller.Controller.<init>(Controller.java:15)
+	at android.william.hangman.net.ClientHandler.<init>(ClientHandler.java:38)
+	at android.william.hangman.net.Server.startHandler(Server.java:41)
+	at android.william.hangman.net.Server.acceptSockets(Server.java:31)
+	at android.william.hangman.view.View.start(View.java:39)
+	at android.william.hangman.startup.Main.main(Main.java:13)
+Exception was thrown: Socket is closed2019/01/10 18:03:47
+java.net.SocketException: Socket is closed
+	at java.base/java.net.Socket.getOutputStream(Socket.java:944)
+	at android.william.hangman.net.ClientHandler.run(ClientHandler.java:48)
+	at java.base/java.lang.Thread.run(Thread.java:834)
