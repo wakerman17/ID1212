@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Hangman_server</string>
+    <string name="clear">Clear</string>
+    <string name="guess">Guess a letter or word</string>
+    <string name="quit">Quit</string>
+    <string name="new_word">New Word</string>
+    <string name="guessString">Guess</string>
+</resources>
