@@ -11,8 +11,8 @@ import currency.util.Util;
  *
  */
 class ConversionForm {
-    @NotNull	(message = "Please specify amount")
-    @Pattern 	(regexp="^[0-9]*\\.?[0-9]+$", message = "Only letters allowed")
+    @NotBlank	(message = "Please specify amount")
+    @Pattern 	(regexp="^$|^[0-9]*\\.?[0-9]+$", message = "Only letters allowed")
     private String startValue;
     
     @NotBlank	(message = "You have to specify the start currency")
