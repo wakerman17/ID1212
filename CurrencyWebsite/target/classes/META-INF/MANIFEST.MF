@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: willi
+Build-Jdk: 11.0.1
+Implementation-Title: CurrencyWebsite
+Implementation-Version: 1.0.0
+Implementation-Vendor-Id: com.example
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/CurrencyWebsite
+Created-By: Maven Integration for Eclipse
+

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<nav th:fragment="navigation">
+    <ul> 
+        <li th:if="${#httpServletRequest.requestURI} == '/conversion'">
+        	<p class="navLink" id="active">Main</p>
+        </li>
+        <li th:unless="${#httpServletRequest.requestURI} == '/conversion'">
+        	<a class="navLink" th:href="@{/conversion}">Main</a>
+        </li>
+        <li th:if="${#httpServletRequest.requestURI} == '/aboutCurrencyConverters'">
+        	<p class="navLink" id="active">About Currency Converters</p>
+        </li>
+        <li th:unless="${#httpServletRequest.requestURI} == '/aboutCurrencyConverters'">
+        	<a class="navLink" th:href="@{/aboutCurrencyConverters}">About Currency Converters</a>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>

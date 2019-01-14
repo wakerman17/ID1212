@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{resources/fragments/layout}">
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Money conversion</title>
+</head>
+<body>
+	<main layout:fragment="content">
+	
+	<form th:action="@{/conversion}" th:object="${conversionForm}" method="post">
+		<p class="form">
+			<label for="start-value">The amount you want to
+				convert</label>: <input type="text" th:field="*{startValue}" /> <span class="error"
+				th:if="${#fields.hasErrors('startValue')}" th:errors="*{startValue}">Missing</span>
+		</p>
+		<p class="form">
+			Start currency <select th:field="*{startCurrency}">
+				<option value=""> -- </option>
+				<!-- <option th:each="type : ${currenyTypes}" th:value="${type}" th:text="${type}"></option> -->
+				<option th:value="SEK" th:text="SEK"></option>
+				<option th:value="USD" th:text="USD"></option>
+				<option th:value="Yen" th:text="Yen"></option>
+				<option th:value="Euro" th:text="Euro"></option>
+				
+			</select> Conversion <select th:field="*{endCurrency}">
+				<option value=""> -- </option>
+				<!-- <option th:each="type : ${currenyTypes}" th:value="${type}" th:text="${type}"></option> -->
+				<option th:value="SEK" th:text="SEK"></option>
+				<option th:value="USD" th:text="USD"></option>
+				<option th:value="Yen" th:text="Yen"></option>
+				<option th:value="Euro" th:text="Euro"></option>
+			</select>
+			<span class="error" th:if="${#fields.hasErrors('startCurrency')}" 
+			th:errors="*{startCurrency}">Missing</span>
+			<span class="error" th:if="${#fields.hasErrors('startCurrency') && #fields.hasErrors('endCurrency')}" 
+			>||</span>
+			<span class="error" th:if="${#fields.hasErrors('endCurrency')}" 
+			th:errors="*{endCurrency}">Missing</span>
+		</p>
+		<p class="submit">
+			<input type="submit" value="Convert" />
+		</p>
+	</form>
+	<div th:if="*{conversion} != null">
+		Result:<p th:text="*{conversion}">Missing</p>
+	</div>
+	</main>
+</body>
+</html>
